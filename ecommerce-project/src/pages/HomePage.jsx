@@ -1,14 +1,20 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
-import { products } from "../../starting-code/data/products";
 import "./HomePage.css";
 
 export function HomePage() {
 
-    axios.get('http://localhost:3000/api/products') // this will fetch the data from backend and in that time the code will not wait keeps executing and in the future when the data is received it will execute the then block which will execute the function inside it. when fetch gets the data it will save the data in the parameter below response note: enlike fetch we will get the data in the response.data and it is a cleaner way to make API requests
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/products') // this will fetch the data from backend and in that time the code will not wait keeps executing and in the future when the data is received it will execute the then block which will execute the function inside it. when fetch gets the data it will save the data in the parameter below response note: enlike fetch we will get the data in the response.data and it is a cleaner way to make API requests
         .then((response) => {
-            console.log(response);
+            setProducts(response.data);
         }); 
+    }, [])
+
+    
 
     return (
         <>
