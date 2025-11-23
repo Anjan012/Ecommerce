@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import "./HomePage.css";
 
-export function HomePage() {
+export function HomePage({cart}) {
 
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+  
 
     useEffect(() => {
         axios.get('/api/products') // this will fetch the data from backend and in that time the code will not wait keeps executing and in the future when the data is received it will execute the then block which will execute the function inside it. when fetch gets the data it will save the data in the parameter below response note: enlike fetch we will get the data in the response.data and it is a cleaner way to make API requests
@@ -14,11 +14,7 @@ export function HomePage() {
             setProducts(response.data);
         }); 
 
-        // getting cart data
-        axios.get("/api/cart-items")
-            .then((response) => {
-                setCart(response.data);
-            });
+       
     }, [])
 
     
