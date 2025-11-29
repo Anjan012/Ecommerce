@@ -10,7 +10,7 @@ export function HomePage({cart}) {
   
 
     useEffect(() => {
-        axios.get('/api/products') // this will fetch the data from backend and in that time the code will not wait keeps executing and in the future when the data is received it will execute the then block which will execute the function inside it. when fetch gets the data it will save the data in the parameter below response note: enlike fetch we will get the data in the response.data and it is a cleaner way to make API requests
+        axios.get('/api/products') // this will fetch the data from backend and in that time the code will not wait keeps executing and in the future when the data is received it will execute the then block which will execute the function inside it. when fetch gets the data it will save the data in the parameter below response note: unlike fetch we will get the data in the response.data and it is a cleaner way to make API requests
         .then((response) => {
             setProducts(response.data);
         }); 
