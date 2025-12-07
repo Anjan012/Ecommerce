@@ -2,12 +2,12 @@ import { Link } from "react-router";
 import { Header } from "../components/Header";
 import "./Error.css";
 
-export function Error() {
+export function Error({cart}) {
     return (
         <>
             <title>Error</title>
 
-            <Header />
+            <Header cart={cart}/>
 
             <div className="decorative-circles">
                 <div className="circle"></div>
