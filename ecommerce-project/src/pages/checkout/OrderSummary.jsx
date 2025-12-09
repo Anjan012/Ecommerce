@@ -11,13 +11,15 @@ export function OrderSummary({cart, deliveryOptions, loadCart}) {
                     const selectedDeliveryOption = deliveryOptions
                         .find((deliveryOption) => {
                             return deliveryOption.id === cartItem.deliveryOptionId;
-                        })
+                        });
+
+                        
                     return (
                         <div key={cartItem.productId} className="cart-item-container">
                             <DeliveryDate selectedDeliveryOption={selectedDeliveryOption} />
 
                             <div className="cart-item-details-grid">
-                                <CartItemDetails cartItem={cartItem}/>
+                                <CartItemDetails cartItem={cartItem} loadCart={loadCart}/>
 
                                 <DeliveryOptions cartItem={cartItem} deliveryOptions={deliveryOptions} loadCart={loadCart}/>
                             </div>
