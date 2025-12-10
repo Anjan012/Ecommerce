@@ -2,7 +2,7 @@
 import { OrderHeader } from "./OrderHeader";
 import { OrderDeatils } from "./OrdersDetails";
 
-export function OrdersGrid({ orders }) {
+export function OrdersGrid({ orders, loadCart }) {
     return (
         <div className="orders-grid">
             {
@@ -12,7 +12,7 @@ export function OrdersGrid({ orders }) {
 
                             <OrderHeader order={order} />
 
-                            <OrderDeatils order={order} />
+                            <OrderDeatils order={order} loadCart={loadCart}/>
                         </div>
                     );
                 })

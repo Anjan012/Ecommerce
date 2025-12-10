@@ -4,7 +4,7 @@ import { Header } from "../../components/Header";
 import { OrdersGrid } from "./OrdersGrid";
 import "./OrdersPage.css";
 
-export function OrdersPage({ cart }) { // cart is a props
+export function OrdersPage({ cart, loadCart}) { // cart is a props
 
     const [orders, setOrders] = useState([]);
 
@@ -28,7 +28,7 @@ export function OrdersPage({ cart }) { // cart is a props
             <div className="orders-page">
                 <div className="page-title">Your Orders</div>
 
-                <OrdersGrid orders={orders} />
+                <OrdersGrid orders={orders} loadCart={loadCart}/>
             </div>
         </>
     )
