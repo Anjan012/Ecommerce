@@ -2,22 +2,28 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { ProductsGrid } from "./ProductsGrid";
+import { useSearchParams } from "react-router";
 import "./HomePage.css";
 
 export function HomePage({ cart, loadCart }) {
+
+    const [searchParams] = useSearchParams();
+    const search = searchParams.get('search');
+
 
     const [products, setProducts] = useState([]);
 
 
     // there is a problem of using async await and use effect in react, the inner function in useEffect should not return a promise it is breacking the rules of use effect
-    useEffect( () => {
+    useEffect(() => {
         const getHomeData = async () => {
-            const response = await axios.get('/api/products') // it's recommended to use async await in react when we can instead of promises
+            const urlPath = search ? `/api/products?search=${search}` : '/api/products';
+            const response = await axios.get(urlPath);
             setProducts(response.data);
         }
         getHomeData();
 
-    }, [])
+    }, [search])
 
 
 
@@ -28,7 +34,7 @@ export function HomePage({ cart, loadCart }) {
 
             <Header cart={cart} />
             <div className="home-page">
-                <ProductsGrid products={products} loadCart={loadCart}/>
+                <ProductsGrid products={products} loadCart={loadCart} />
             </div>
         </>
     );
