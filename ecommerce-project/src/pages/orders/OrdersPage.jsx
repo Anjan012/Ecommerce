@@ -4,6 +4,8 @@ import { Header } from "../../components/Header";
 import { OrdersGrid } from "./OrdersGrid";
 import "./OrdersPage.css";
 
+window.axios = axios; // // This makes axios available in the Console. Then, you can try running axios.post('/api/reset') in the Console.
+
 export function OrdersPage({ cart, loadCart}) { // cart is a props
 
     const [orders, setOrders] = useState([]);
