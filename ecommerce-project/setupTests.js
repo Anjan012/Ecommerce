@@ -1,0 +1,1 @@
+import '@testing-library/jest-dom'; // jestdom basically add bunch of methods to expect() that help us test components
