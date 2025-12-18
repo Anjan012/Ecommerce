@@ -72,7 +72,7 @@ describe("HomePage Component", () => {
         ).toBeInTheDocument();
     });
 
-    it('adds a product tot the cart', async () => {
+    it('adds a product to the cart', async () => {
 
         render(
             <MemoryRouter>
@@ -97,7 +97,7 @@ describe("HomePage Component", () => {
         const addToCartButton2 = within(productContainers[1])
             .getByTestId('add-to-cart-button');
         await user.click(addToCartButton2);
-        
+
         expect(axios.post).toHaveBeenNthCalledWith(1, '/api/cart-items', {
             productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
             quantity: 2
