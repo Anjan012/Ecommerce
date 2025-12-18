@@ -11,6 +11,15 @@ describe("formatMoney", () => {
     // adding another checks
     expect(formatMoney(100)).toBe("$1.00");
   });
+
+  it("format 0 cents to $0.00", () => {
+    expect(formatMoney(0)).toBe("$0.00");
+  });
+
+  it('formats -999 cents to -$9.99', () => {
+    expect(formatMoney(-999)).toBe('$-9.99');
+  })
+
 });
 
 // note: all of the checks needs to pass inorder for this test to pass if one fails the entire test fails
