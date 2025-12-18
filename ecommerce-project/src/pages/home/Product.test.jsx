@@ -11,8 +11,8 @@ describe('Product component', () => {
     let product;
 
     // we should not contact a real backend cause the backend might not be available during the test and it might accidently update the real data a best practice is to mock the function in our test {mock : create a fake version of the function  }
-    let loadCart; 
-
+    let loadCart;
+    let user;
 
     // befoore each test we can recreate this variables
     beforeEach(() => { // beforeEach is a test hook
@@ -29,6 +29,8 @@ describe('Product component', () => {
         }
 
         loadCart = vi.fn();
+
+        user = userEvent.setup() // It returns an Object (the "user instance") that contains all the interaction methods you need lik .click .hover
     })
 
     it('displays the products details correctly', () => {
@@ -61,7 +63,6 @@ describe('Product component', () => {
 
         render(<Product product={product} loadCart={loadCart} />);
 
-        const user = userEvent.setup(); // setup event now we can simulate event
         const addToCartButton = screen.getByTestId('add-to-cart-button');
         await user.click(addToCartButton); // since clicking a button requires time we need to use await 
 
@@ -74,6 +75,26 @@ describe('Product component', () => {
             }
         );
         expect(loadCart).toHaveBeenCalled(); // it checks if it has been call only
+    });
+
+    it('selects a quantity', async () => {
+        render(<Product product={product} loadCart={loadCart} />);
+        const quantitySelector = screen.getByTestId('product-quantity-selector');
+
+        await user.selectOptions(quantitySelector, '3'),
+        expect(
+            quantitySelector
+        ).toHaveValue('3');
+        const addToCartButton = screen.getByTestId('add-to-cart-button');
+        await user.click(addToCartButton);
+        expect(axios.post).toHaveBeenCalledWith(
+            '/api/cart-items',
+            {
+                productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+                quantity: 3
+            }
+        );
+        expect(loadCart).toHaveBeenCalled();
     })
 
 });
